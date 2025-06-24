@@ -1,0 +1,281 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #000000 0%, #1a001a 50%, #000000 100%);
+    min-height: 100vh;
+    color: #fff;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
+    border: 2px solid #8A2BE2;
+}
+
+h1 {
+    text-align: center;
+    background: linear-gradient(45deg, #8A2BE2, #6A1B9A);
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 5px 15px rgba(138, 43, 226, 0.5);
+}
+
+.input-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 15px;
+    border: 2px solid #8A2BE2;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #9A4BE2;
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+#adicionarBtn {
+    padding: 15px 25px;
+    background: linear-gradient(45deg, #8A2BE2, #6A1B9A);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+}
+
+#adicionarBtn:hover {
+    background: linear-gradient(45deg, #9A4BE2, #8A2BE2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(138, 43, 226, 0.5);
+}
+
+#adicionarBtn:active {
+    transform: translateY(0);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: rgba(138, 43, 226, 0.1);
+    margin: 10px 0;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #8A2BE2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+li:hover {
+    background: rgba(138, 43, 226, 0.2);
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.2);
+}
+
+li span {
+    flex: 1;
+    font-size: 16px;
+    word-break: break-word;
+}
+
+/* Botão remover customizado */
+button[onclick*="remover"], .btn-remover {
+    background: linear-gradient(45deg, #4A0E4E, #2D1B69);
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    margin-left: 15px;
+    box-shadow: 0 2px 8px rgba(74, 14, 78, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+button[onclick*="remover"]:before, .btn-remover:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+button[onclick*="remover"]:hover, .btn-remover:hover {
+    background: linear-gradient(45deg, #6A1B9A, #4A0E4E);
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(106, 27, 154, 0.5);
+}
+
+button[onclick*="remover"]:hover:before, .btn-remover:hover:before {
+    left: 100%;
+}
+
+button[onclick*="remover"]:active, .btn-remover:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 8px rgba(74, 14, 78, 0.6);
+}
+
+/* Variação alternativa do botão remover - mais elegante */
+.btn-remover-alt {
+    background: transparent;
+    color: #8A2BE2;
+    border: 2px solid #8A2BE2;
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    margin-left: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-remover-alt:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: #8A2BE2;
+    transition: width 0.3s ease;
+    z-index: -1;
+}
+
+.btn-remover-alt:hover {
+    color: #fff;
+    border-color: #9A4BE2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(138, 43, 226, 0.4);
+}
+
+.btn-remover-alt:hover:before {
+    width: 100%;
+}
+
+/* Botão remover com ícone "X" */
+.btn-remover-x {
+    background: linear-gradient(45deg, #4A0E4E, #2D1B69);
+    color: #fff;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(74, 14, 78, 0.4);
+}
+
+.btn-remover-x:hover {
+    background: linear-gradient(45deg, #6A1B9A, #4A0E4E);
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 4px 15px rgba(106, 27, 154, 0.5);
+}
+
+.btn-remover-x:active {
+    transform: rotate(90deg) scale(0.95);
+}
+
+.empty-state {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+    padding: 40px;
+    border: 2px dashed rgba(138, 43, 226, 0.3);
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+        padding: 15px;
+    }
+
+    .input-container {
+        flex-direction: column;
+    }
+
+    #adicionarBtn {
+        width: 100%;
+    }
+
+    li {
+        padding: 15px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    button[onclick*="remover"], .btn-remover, .btn-remover-alt, .btn-remover-x {
+        margin-left: 0;
+        margin-top: 10px;
+        align-self: flex-end;
+    }
+}
+.riscado {
+    text-decoration: line-through;
+    color:chartreuse
+  }
+
