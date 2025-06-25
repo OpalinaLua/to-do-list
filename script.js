@@ -23,6 +23,27 @@ function criarItemTarefa(texto) {
             salvarTarefas();
         }, 300);
     });
+//organizar
+    function organizarListaPorStatus() {
+    const itens = Array.from(lista.children);
+
+    itens.sort((a, b) => {
+        const statusA = a.querySelector('button').textContent;
+        const statusB = b.querySelector('button').textContent;
+
+        const ordem = {
+            "Pendente": 1,
+            "Em andamento": 2,
+            "Concluido": 3,
+            "Selecionar status": 0 // opcional: joga pro fim
+        };
+
+        return (ordem[statusA] ?? 99) - (ordem[statusB] ?? 99);
+    });
+
+    // Reanexa os itens na nova ordem
+    itens.forEach(item => lista.appendChild(item));
+}
 //Tentativa de botao status 
     const btnStatus = document.createElement('button');
     btnStatus.textContent = 'Selecionar status';
@@ -57,6 +78,7 @@ function criarItemTarefa(texto) {
         }
         
         salvarTarefas(); 
+        organizarListaPorStatus();
     });
 //funcoes 
     item.appendChild(spanTexto);
