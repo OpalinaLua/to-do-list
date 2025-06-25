@@ -117,7 +117,7 @@ li span {
     word-break: break-word;
 }
 
-/* Botão remover customizado */
+/* Botão remover  */
 button[onclick*="remover"], .btn-remover {
     background: linear-gradient(45deg, #4A0E4E, #2D1B69);
     color: #fff;
@@ -162,75 +162,6 @@ button[onclick*="remover"]:active, .btn-remover:active {
     box-shadow: 0 2px 8px rgba(74, 14, 78, 0.6);
 }
 
-/* Variação alternativa do botão remover - mais elegante */
-.btn-remover-alt {
-    background: transparent;
-    color: #8A2BE2;
-    border: 2px solid #8A2BE2;
-    padding: 8px 14px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    margin-left: 15px;
-    position: relative;
-    overflow: hidden;
-}
-
-.btn-remover-alt:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background: #8A2BE2;
-    transition: width 0.3s ease;
-    z-index: -1;
-}
-
-.btn-remover-alt:hover {
-    color: #fff;
-    border-color: #9A4BE2;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(138, 43, 226, 0.4);
-}
-
-.btn-remover-alt:hover:before {
-    width: 100%;
-}
-
-/* Botão remover com ícone "X" */
-.btn-remover-x {
-    background: linear-gradient(45deg, #4A0E4E, #2D1B69);
-    color: #fff;
-    border: none;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    margin-left: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 8px rgba(74, 14, 78, 0.4);
-}
-
-.btn-remover-x:hover {
-    background: linear-gradient(45deg, #6A1B9A, #4A0E4E);
-    transform: rotate(90deg) scale(1.1);
-    box-shadow: 0 4px 15px rgba(106, 27, 154, 0.5);
-}
-
-.btn-remover-x:active {
-    transform: rotate(90deg) scale(0.95);
-}
 
 .empty-state {
     text-align: center;
@@ -274,6 +205,168 @@ button[onclick*="remover"]:active, .btn-remover:active {
         align-self: flex-end;
     }
 }
+
+/* Botão Stilo Concluido */
+.btn-Status {
+    background: linear-gradient(45deg, gray, white);
+    color: black;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    margin-left: 15px;
+    box-shadow: 0 2px 8px gray;
+    position: relative;
+    overflow: hidden;
+}
+.btn-Status:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.2), transparent);
+    transition: left 0.5s;
+}
+.btn-Status:hover {
+    background: linear-gradient(45deg,white, gray);
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px gray;
+}
+.btn-Status:hover:before {
+    left: 100%;
+}
+.btn-Status:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+/* Botão Stilo pendente */
+.emCima {
+    background: linear-gradient(45deg, crimson, rgb(95, 9, 26));
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    margin-left: 15px;
+    box-shadow: 0 2px 8px rgba(78, 14, 14, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+.emCima:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+.emCima:hover {
+    background: linear-gradient(45deg, rgb(95, 9, 26), crimson);
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(154, 27, 27, 0.5);
+}
+.emCima:hover:before {
+    left: 100%;
+}
+.emCima:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 8px rgba(78, 14, 14, 0.6);
+}
+/* Botão Stilo Em andamento*/
+.meio {
+    background: linear-gradient(45deg, rgb(119, 59, 2),rgb(255, 123, 0));
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    margin-left: 15px;
+    box-shadow: 0 2px 8px rgba(78, 40, 14, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+.meio:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+.meio:hover {
+    background: linear-gradient(45deg, rgb(255, 123, 0), rgb(119, 45, 2));
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(154, 67, 27, 0.5);
+}
+.meio:hover:before {
+    left: 100%;
+}
+.meio:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 8px rgba(78, 34, 14, 0.6);
+}
+/* Botão Stilo Concluido */
+.emBaixo {
+    background: linear-gradient(45deg, green, rgb(1, 226, 1));
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    margin-left: 15px;
+    box-shadow: 0 2px 8px darkgreen;
+    position: relative;
+    overflow: hidden;
+}
+.emBaixo:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+.emBaixo:hover {
+    background: linear-gradient(45deg, rgb(0, 255, 0), green);
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px darkgreen;
+}
+.emBaixo:hover:before {
+    left: 100%;
+}
+.emBaixo:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 8px darkgreen;
+}
+
 .riscado {
     text-decoration: line-through;
     color:chartreuse

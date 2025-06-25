@@ -33,24 +33,30 @@ function criarItemTarefa(texto) {
         
         if (statusAtual === 'Selecionar status') {
             btnStatus.textContent = 'Pendente';
-            btnStatus.style.backgroundColor = 'red'; 
+            btnStatus.className ='emCima'
+            btnStatus.style.backgroundColor = 'crimson'; 
             spanTexto.classList.remove('riscado'); 
+        
         } else if (statusAtual === 'Pendente') {
             btnStatus.textContent = 'Em andamento';
+            btnStatus.className ='meio'
             btnStatus.style.backgroundColor = 'orange'; 
             spanTexto.classList.remove('riscado');
+
         } else if (statusAtual === 'Em andamento'){
             btnStatus.textContent = 'Concluido';
+            btnStatus.className ='emBaixo'
             btnStatus.style.backgroundColor = 'green'; 
             spanTexto.classList.add('riscado');
+
         }else {
             btnStatus.textContent = 'Pendente';
+            btnStatus.className ='emCima'
             btnStatus.style.backgroundColor = 'red'; 
             spanTexto.classList.remove('riscado');
         }
         
         salvarTarefas(); 
-        atualizarOrdemDaLista(document.getElementById('listaTarefas')); 
     });
 //funcoes 
     item.appendChild(spanTexto);
@@ -80,6 +86,7 @@ function carregarTarefas() {
     const tarefasSalvas = localStorage.getItem('minhasTarefas');
     if (tarefasSalvas) {
         const tarefas = JSON.parse(tarefasSalvas);
+        console.log(tarefas)
         tarefas.forEach(textoDaTarefa => {
             criarItemTarefa(textoDaTarefa);
         });
