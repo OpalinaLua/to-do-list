@@ -207,7 +207,7 @@ button[onclick*="remover"]:active, .btn-remover:active {
 }
 
 /* Botão Stilo Concluido */
-.btn-Status {
+.status {
     background: linear-gradient(45deg, gray, white);
     color: black;
     border: none;
@@ -224,7 +224,7 @@ button[onclick*="remover"]:active, .btn-remover:active {
     position: relative;
     overflow: hidden;
 }
-.btn-Status:before {
+.status:before {
     content: '';
     position: absolute;
     top: 0;
@@ -234,15 +234,15 @@ button[onclick*="remover"]:active, .btn-remover:active {
     background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.2), transparent);
     transition: left 0.5s;
 }
-.btn-Status:hover {
+.status:hover {
     background: linear-gradient(45deg,white, gray);
     transform: scale(1.05);
     box-shadow: 0 4px 15px rgb(255, 255, 255);
 }
-.btn-Status:hover:before {
+.status:hover:before {
     left: 100%;
 }
-.btn-Status:active {
+.status:active {
     transform: scale(0.98);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }

@@ -2,90 +2,78 @@ const input = document.getElementById('tarefaInput');
 const btn = document.getElementById('adicionarBtn');
 const lista = document.getElementById('listaTarefas');
 
-function criarItemTarefa(texto) {
+// Função para aplicar estilo conforme status
+function aplicarEstiloStatus(status, btnStatus, spanTexto) {
+    btnStatus.className = '';
+    if (status === 'Pendente') {
+        btnStatus.className = 'emCima';
+        btnStatus.style.backgroundColor = 'crimson';
+        spanTexto.classList.remove('riscado');
+    } else if (status === 'Em andamento') {
+        btnStatus.className = 'meio';
+        btnStatus.style.backgroundColor = 'orange';
+        spanTexto.classList.remove('riscado');
+    } else if (status === 'Concluido') {
+        btnStatus.className = 'emBaixo';
+        btnStatus.style.backgroundColor = 'green';
+        spanTexto.classList.add('riscado');
+    } else {
+        btnStatus.className = 'status';
+        btnStatus.style.backgroundColor = 'gray';
+        spanTexto.classList.remove('riscado');
+    }
+}
+
+// Função para criar um item de tarefa
+function criarItemTarefa(texto, statusInicial = 'Selecionar status') {
     const item = document.createElement('li');
     
     const spanTexto = document.createElement('span');
     spanTexto.textContent = texto;
     spanTexto.style.flex = '1';
-    //botao remover com a funcao remover
+
     const btnRemover = document.createElement('button');
     btnRemover.textContent = 'REMOVER';
     btnRemover.className = 'btn-remover';
-    
     btnRemover.addEventListener('click', () => {
         item.style.opacity = '0';
         item.style.transform = 'translateX(-20px)';
         item.style.transition = 'all 0.3s ease';
-        
         setTimeout(() => {
             lista.removeChild(item);
             salvarTarefas();
         }, 300);
     });
-//organizar
-    function organizarListaPorStatus() {
-    const itens = Array.from(lista.children);
 
-    itens.sort((a, b) => {
-        const statusA = a.querySelector('button').textContent;
-        const statusB = b.querySelector('button').textContent;
-
-        const ordem = {
-            "Pendente": 1,
-            "Em andamento": 2,
-            "Concluido": 3,
-            "Selecionar status": 0 // opcional: joga pro fim
-        };
-
-        return (ordem[statusA] ?? 99) - (ordem[statusB] ?? 99);
-    });
-
-    // Reanexa os itens na nova ordem
-    itens.forEach(item => lista.appendChild(item));
-}
-//Tentativa de botao status 
     const btnStatus = document.createElement('button');
-    btnStatus.textContent = 'Selecionar status';
+    btnStatus.textContent = statusInicial;
     btnStatus.className = 'btn-Status';
+
+    aplicarEstiloStatus(statusInicial, btnStatus, spanTexto);
 
     btnStatus.addEventListener('click', () => {
         const statusAtual = btnStatus.textContent;
-        
+
         if (statusAtual === 'Selecionar status') {
             btnStatus.textContent = 'Pendente';
-            btnStatus.className ='emCima'
-            btnStatus.style.backgroundColor = 'crimson'; 
-            spanTexto.classList.remove('riscado'); 
-        
         } else if (statusAtual === 'Pendente') {
             btnStatus.textContent = 'Em andamento';
-            btnStatus.className ='meio'
-            btnStatus.style.backgroundColor = 'orange'; 
-            spanTexto.classList.remove('riscado');
-
-        } else if (statusAtual === 'Em andamento'){
+        } else if (statusAtual === 'Em andamento') {
             btnStatus.textContent = 'Concluido';
-            btnStatus.className ='emBaixo'
-            btnStatus.style.backgroundColor = 'green'; 
-            spanTexto.classList.add('riscado');
-
-        }else {
+        } else {
             btnStatus.textContent = 'Pendente';
-            btnStatus.className ='emCima'
-            btnStatus.style.backgroundColor = 'red'; 
-            spanTexto.classList.remove('riscado');
         }
-        
-        salvarTarefas(); 
+
+        aplicarEstiloStatus(btnStatus.textContent, btnStatus, spanTexto);
+        salvarTarefas();
         organizarListaPorStatus();
     });
-//funcoes 
+
     item.appendChild(spanTexto);
     item.appendChild(btnStatus);
     item.appendChild(btnRemover);
     lista.appendChild(item);
-    
+
     item.style.opacity = '0';
     item.style.transform = 'translateY(-10px)';
     setTimeout(() => {
@@ -95,26 +83,58 @@ function criarItemTarefa(texto) {
     }, 10);
 }
 
+// Salvar tarefas (texto + status)
 function salvarTarefas() {
     const tarefas = [];
-    lista.querySelectorAll('li span').forEach(span => {
-        tarefas.push(span.textContent.trim()); 
+    lista.querySelectorAll('li').forEach(item => {
+        const span = item.querySelector('span');
+        const botaoStatus = item.querySelector('button');
+
+        tarefas.push({
+            texto: span.textContent.trim(),
+            status: botaoStatus.textContent
+        });
     });
 
-    localStorage.setItem('minhasTarefas', JSON.stringify(tarefas));
+    const tarefasJSON = JSON.stringify(tarefas);
+    console.log('Salvando tarefas no localStorage:', tarefasJSON);  // <-- Aqui!
+    localStorage.setItem('minhasTarefas', tarefasJSON);
 }
 
+// Carregar tarefas com status
 function carregarTarefas() {
     const tarefasSalvas = localStorage.getItem('minhasTarefas');
     if (tarefasSalvas) {
         const tarefas = JSON.parse(tarefasSalvas);
-        console.log(tarefas)
-        tarefas.forEach(textoDaTarefa => {
-            criarItemTarefa(textoDaTarefa);
+        tarefas.forEach(({ texto, status }) => {
+            criarItemTarefa(texto, status);
         });
+        organizarListaPorStatus();
     }
 }
 
+// Organizar lista conforme status
+function organizarListaPorStatus() {
+    const itens = Array.from(lista.children);
+
+    itens.sort((a, b) => {
+        const statusA = a.querySelector('button').textContent;
+        const statusB = b.querySelector('button').textContent;
+
+        const ordem = {
+            "Selecionar status": 0,
+            "Pendente": 1,
+            "Em andamento": 2,
+            "Concluido": 3
+        };
+
+        return (ordem[statusA] ?? 99) - (ordem[statusB] ?? 99);
+    });
+
+    itens.forEach(item => lista.appendChild(item));
+}
+
+// Adicionar nova tarefa via botão
 btn.addEventListener('click', () => {
     const texto = input.value.trim();
     if (texto === "") {
@@ -123,12 +143,18 @@ btn.addEventListener('click', () => {
     }
     criarItemTarefa(texto);
     input.value = '';
-    salvarTarefas(); 
+    salvarTarefas();
+    organizarListaPorStatus();
 });
 
+// Adicionar nova tarefa via Enter
 input.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         btn.click();
     }
 });
-document.addEventListener('DOMContentLoaded', carregarTarefas);
+
+// Carregar tarefas ao iniciar a página
+document.addEventListener('DOMContentLoaded', () => {
+    carregarTarefas();
+});
